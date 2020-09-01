@@ -3,7 +3,9 @@
 		{
 			"path": "pages/tabbar/index/index",
 			"style": {
-				"navigationBarTitleText": "主页"
+				"navigationStyle": "custom",
+				"navigationBarTitleText": "主页",
+				"navigationBarTextStyle":"white"
 			}
 		},
 		{

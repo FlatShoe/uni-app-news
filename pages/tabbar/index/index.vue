@@ -1,10 +1,14 @@
 <template>
 	<view class="content">
-		
+		<!-- 自定义组件-TopBar -->
+		<TopBar />
+		<view v-for="item in 100">{{item}}</view>
 	</view>
 </template>
 
 <script>
+	// uni-app中使用组件 组件目录与组件名称一致可以直接使用不需要通过import进行引入，
+		 // easeCom - 帮助自动帮助我们局部引入
 	export default {
 		data() {
 			return {
@@ -21,29 +25,5 @@
 </script>
 
 <style>
-	.content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.logo {
-		height: 200rpx;
-		width: 200rpx;
-		margin-top: 200rpx;
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: 50rpx;
-	}
-
-	.text-area {
-		display: flex;
-		justify-content: center;
-	}
-
-	.title {
-		font-size: 36rpx;
-		color: #8f8f94;
-	}
+	
 </style>
