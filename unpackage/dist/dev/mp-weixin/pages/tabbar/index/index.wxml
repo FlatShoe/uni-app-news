@@ -1,1 +1,0 @@
-<view class="content"><top-bar vue-id="f8c7e56e-1" bind:__l="__l"></top-bar><tab vue-id="f8c7e56e-2" list="{{labelList}}" bind:__l="__l"></tab></view>
