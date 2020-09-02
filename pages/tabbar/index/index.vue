@@ -23,8 +23,7 @@
 			* @return undefined
 			*/
 			async getLabel () {
-				// 调用云函数方法
-				const {result: {code, data}} = await uniCloud.callFunction({name: 'get_lable'})
+				const {code, data} = await this.$api.get_label('get_label')
 				if (code !== 200) return
 				this.labelList = data
 			}
