@@ -2,7 +2,8 @@
 	<view class="content">
 		<!-- 自定义组件-TopBar -->
 		<TopBar />
-		<view v-for="item in 100">{{item}}</view>
+		<!-- 自定义组件-选项卡 -->
+		<Tab :list="labelList" />
 	</view>
 </template>
 
@@ -12,15 +13,25 @@
 	export default {
 		data() {
 			return {
-				title: 'Hello'
+				title: 'Hello',
+				labelList: []
+			}
+		},
+		methods: {
+			/*
+			* @Description 获取选项卡数据
+			* @return undefined
+			*/
+			async getLabel () {
+				// 调用云函数方法
+				const {result: {code, data}} = await uniCloud.callFunction({name: 'get_lable'})
+				if (code !== 200) return
+				this.labelList = data
 			}
 		},
 		onLoad() {
-
+			this.getLabel()
 		},
-		methods: {
-
-		}
 	}
 </script>
 

@@ -10,7 +10,9 @@
 			<view :style="{height: statusBarHeight + 'px'}"></view>
 			<view class="topbar-content" :style="{'height': topBarHeight + 'px', 'width': topBarWidth + 'px'}">
 				<view class="topbar-serch">
-					<view class="topbar-serch-icon"></view>
+					<view class="topbar-serch-icon iconfont">
+						<text>&#xe62e;</text>
+					</view>
 					<view class="topbar-serch-text">uni-app、vue</view>
 				</view>
 			</view>
@@ -67,6 +69,7 @@
 </script>
 
 <style lang="less">
+	@import '../../common/style/icon.css';
 	.topbar {
 		.topbar-fixed {
 			position: fixed;
@@ -91,16 +94,12 @@
 					background-color: #fff;
 					border-radius: 30px;
 					padding: 0 15px;
-
+					font-size: 12px;
 					.topbar-serch-icon {
-						width: 10px;
-						height: 10px;
-						border: 1px solid red;
 						margin-right: 10px;
 					}
 
 					.topbar-serch-text {
-						font-size: 12px;
 						color: #999;
 					}
 				}

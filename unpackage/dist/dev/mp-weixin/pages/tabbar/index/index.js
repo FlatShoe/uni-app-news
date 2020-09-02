@@ -100,6 +100,9 @@ __webpack_require__.r(__webpack_exports__);
 var components = {
   TopBar: function() {
     return __webpack_require__.e(/*! import() | components/TopBar/TopBar */ "components/TopBar/TopBar").then(__webpack_require__.bind(null, /*! @/components/TopBar/TopBar.vue */ 29))
+  },
+  Tab: function() {
+    return __webpack_require__.e(/*! import() | components/Tab/Tab */ "components/Tab/Tab").then(__webpack_require__.bind(null, /*! @/components/Tab/Tab.vue */ 38))
   }
 }
 var render = function() {
@@ -137,7 +140,8 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uniCloud) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 48));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} //
+//
 //
 //
 //
@@ -151,13 +155,26 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 var _default = {
   data: function data() {
     return {
-      title: 'Hello' };
+      title: 'Hello',
+      labelList: [] };
 
   },
+  methods: {
+    /*
+             * @Description 获取选项卡数据
+             * @return undefined
+             */
+    getLabel: function getLabel() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var _yield$uniCloud$callF, _yield$uniCloud$callF2, code, data;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+
+                  uniCloud.callFunction({ name: 'get_lable' }));case 2:_yield$uniCloud$callF = _context.sent;_yield$uniCloud$callF2 = _yield$uniCloud$callF.result;code = _yield$uniCloud$callF2.code;data = _yield$uniCloud$callF2.data;if (!(
+                code !== 200)) {_context.next = 8;break;}return _context.abrupt("return");case 8:
+                _this.labelList = data;case 9:case "end":return _context.stop();}}}, _callee);}))();
+    } },
+
   onLoad: function onLoad() {
-
-  },
-  methods: {} };exports.default = _default;
+    this.getLabel();
+  } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 46)["default"]))
 
 /***/ })
 ],[[11,"common/runtime","common/vendor"]]]);
