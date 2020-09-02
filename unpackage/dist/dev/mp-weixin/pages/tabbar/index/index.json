@@ -3,6 +3,7 @@
   "navigationBarTitleText": "主页",
   "navigationBarTextStyle": "white",
   "usingComponents": {
-    "top-bar": "/components/TopBar/TopBar"
+    "top-bar": "/components/TopBar/TopBar",
+    "tab": "/components/Tab/Tab"
   }
 }
