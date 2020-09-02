@@ -1,0 +1,1 @@
+<view class="tab"><scroll-view class="tab-scroll" scroll-x="{{true}}"><view class="tab-scroll-container"><block wx:for="{{list}}" wx:for-item="item" wx:for-index="__i0__" wx:key="id"><view class="tab-scroll-item">{{item.name}}</view></block></view></scroll-view><view class="tab-icon"><text class="icon iconfont"></text></view></view>
