@@ -1,8 +1,16 @@
+<!-- 
+@Description 选项卡自定义组件
+@auth LHD
+@Date 2020-09-02
+ -->
 <template>
 	<view class="tab">
 		<scroll-view class="tab-scroll" scroll-x>
 			<view class="tab-scroll-container">
-				<view class="tab-scroll-item" :key="item.id" v-for="item in list">{{item.name}}</view>
+				<view class="tab-scroll-item" 
+							:class="{'active': tabIndex === index}"
+							@click="changeTap(item, index)"
+							:key="item.id" v-for="(item, index) in list">{{item.name}}</view>
 			</view>
 		</scroll-view>
 		<view class="tab-icon"><text class="icon iconfont">&#xe603;</text></view>
@@ -17,12 +25,25 @@
 				default () {
 					return []
 				}
+			},
+			tabIndex: {
+				type: Number
 			}
 		},
 		data() {
-			return {
-				
-			};
+			return {}
+		},
+		methods: {
+			/*
+			* @Description 切换选项并通过自定义事件传值至父组件
+			* @param {Object} item 当前遍历项内容
+			* @param {Number} index 当前遍历项索引
+			* @return undefined
+			*/
+			changeTap (item, index) {
+				this.currentIndex = index
+				this.$emit('changeTap', {item, index})
+			}
 		}
 	}
 </script>
@@ -51,6 +72,9 @@
 					padding: 0 10px;
 					font-size: 14px;
 					color: #333;
+					&.active {
+						color: #016057;
+					}
 				}
 			}
 		}
