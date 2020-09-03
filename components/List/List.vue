@@ -8,7 +8,7 @@
 		<swiper-item class="swiper-item" 
 								 :key="index"
 								 v-for="(item, index) in tab">								 
-			<ListItem :list="list" />
+			<ListItem :list="currentData[index]" />
 		</swiper-item>
 	</swiper>
 </template>
@@ -28,18 +28,19 @@
 		},
 		data() {
 			return {
-				list: []
+				currentData: {}
 			}
 		},
 		methods: {
 			/*
 			* @Description获取视图卡相应数据内容
+			* @param {String} name 选项卡名字
 			* @return undefined
 			*/
-			async getList () {
-				const {code, data} =  await this.$api.get_list('get_list')
+			async getList (name) {
+				const {code, data} =  await this.$api.get_list({url: 'get_list', name})
 				if (code !== 200) return
-				this.list = data
+				this.$set(this.currentData, this.cardIndex, data)
 			},
 			/*
 			* @Description swiper组件滑动监听索引，并通过自定义事件传值至父组件
@@ -49,10 +50,11 @@
 			changeCard (e) {
 				const {detail: {current}} = e
 				this.$emit('changeCard', current)
+				this.getList(this.tab[current].name)
 			}
 		},
-		mounted() {
-			this.getList()
+		created() {
+			this.getList('后端开发')
 		}
 	}
 </script>

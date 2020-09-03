@@ -6,6 +6,7 @@
 		<Tab :list="labelList" :tabIndex="tabIndex" @changeTap="changeTap" />
 		<!-- 自定义组件 选项卡列表轮播组件 -->
 		<view class="home-list">
+			<!-- 自定义组件 选项卡列表内容 -->
 			<List :tab="labelList" :cardIndex="cardIndex" @changeCard="changeCard" />
 		</view>
 	</view>
@@ -28,7 +29,7 @@
 			* @return undefined
 			*/
 			async getLabel () {
-				const {code, data} = await this.$api.get_label('get_label')
+				const {code, data} = await this.$api.get_label({url: 'get_label'})
 				if (code !== 200) return
 				this.labelList = data
 			},

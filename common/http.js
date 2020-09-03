@@ -10,7 +10,7 @@
 */
 export default (options) => {
 	return new Promise ((resolve, reject) => {
-		const {url:name, data=''} = options
+		const {url:name, data={}} = options
 		// 发送网络请求
 		uniCloud.callFunction({name, data})
 			.then((res) => {
