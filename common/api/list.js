@@ -7,3 +7,6 @@ export const get_label = (url, data) => {
 	return $http({url, data})
 }
 
+export const get_list = (url, data) => {
+	return $http({url, data})
+}

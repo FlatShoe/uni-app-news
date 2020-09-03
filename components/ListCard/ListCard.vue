@@ -6,60 +6,59 @@
 <template>
 	<view>
 		<!-- 基础卡片 -->
-		<view v-if="mode === 'base'" class="list-card">
+		<view v-if="item.mode === 'base'" class="list-card">
 			<view class="list-card-img">
-				<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599111928680&di=eedcfa6262d0a8c68bd321841b479d44&imgtype=0&src=http%3A%2F%2Fgss0.baidu.com%2F94o3dSag_xI4khGko9WTAnF6hhy%2Fzhidao%2Fpic%2Fitem%2F14ce36d3d539b6002ac5706de850352ac75cb7e4.jpg" mode="aspectFill" />
+				<img :src="item.cover[0]" mode="aspectFill" />
 			</view>
 			<view class="list-card-content">
 				<view class="list-card-content-title">
-					<text>uni-app</text>
+					<text>{{item.title}}</text>
 				</view>
 				<view class="list-card-content-des">
 					<view class="list-card-content-des-label">
-						<div class="list-card-content-des-label-item">前端</div>
+						<div class="list-card-content-des-label-item">{{item.classify}}</div>
 					</view>
-					<text class="list-card-content-des-browse">120浏览</text>
+					<text class="list-card-content-des-browse">{{item.browse_count}}浏览</text>
 				</view>
 			</view>
 		</view>
 
 		<!-- 多图卡片 -->
-		<view v-if="mode === 'cloumn'" class="list-card mode-cloumn">
+		<view v-if="item.mode === 'column'" class="list-card mode-column">
 			<view class="list-card-content">
 				<view class="list-card-img">
-					<view class="list-card-img-item" :key="index" v-for="(item, index) in 3">
-						<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599111928680&di=eedcfa6262d0a8c68bd321841b479d44&imgtype=0&src=http%3A%2F%2Fgss0.baidu.com%2F94o3dSag_xI4khGko9WTAnF6hhy%2Fzhidao%2Fpic%2Fitem%2F14ce36d3d539b6002ac5706de850352ac75cb7e4.jpg"
-						 mode="aspectFill" />
+					<view v-if="cIndex < 3" class="list-card-img-item" :key="cIndex" v-for="(cItem, cIndex) in item.cover">
+						<img :src="cItem" mode="aspectFill" />
 					</view>
 				</view>
 				<view class="list-card-content-title">
-					<text>uni-app</text>
+					<text>{{item.title}}</text>
 				</view>
 				<view class="list-card-content-des">
 					<view class="list-card-content-des-label">
-						<div class="list-card-content-des-label-item">前端</div>
+						<div class="list-card-content-des-label-item">{{item.classify}}</div>
 					</view>
-					<text class="list-card-content-des-browse">120浏览</text>
+					<text class="list-card-content-des-browse">{{item.browse_count}}浏览</text>
 				</view>
 			</view>
 		</view>
 
 
 		<!-- 大图卡片 -->
-		<view v-if="mode === 'image'" class="list-card mode-image">
+		<view v-if="item.mode === 'image'" class="list-card mode-image">
 			<view class="list-card-img">
-				<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599111928680&di=eedcfa6262d0a8c68bd321841b479d44&imgtype=0&src=http%3A%2F%2Fgss0.baidu.com%2F94o3dSag_xI4khGko9WTAnF6hhy%2Fzhidao%2Fpic%2Fitem%2F14ce36d3d539b6002ac5706de850352ac75cb7e4.jpg"
+				<img :src="item.cover[0]"
 				 mode="aspectFill" />
 			</view>
 			<view class="list-card-content">
 				<view class="list-card-content-title">
-					<text>uni-app</text>
+					<text>{{item.title}}</text>
 				</view>
 				<view class="list-card-content-des">
 					<view class="list-card-content-des-label">
-						<div class="list-card-content-des-label-item">前端</div>
+						<div class="list-card-content-des-label-item">{{item.classify}}</div>
 					</view>
-					<text class="list-card-content-des-browse">120浏览</text>
+					<text class="list-card-content-des-browse">{{item.browse_count}}浏览</text>
 				</view>
 			</view>
 		</view>
@@ -72,6 +71,12 @@
 			mode: {
 				type: String,
 				default: 'base'
+			},
+			item: {
+				type: Object,
+				default () {
+					return {}
+				}
 			}
 		},
 		data() {
@@ -146,31 +151,35 @@
 			}
 		}
 
-		&.mode-cloumn {
+		&.mode-column {
 			.list-card-content {
 				width: 100%;
 				padding-left: 0;
-			}
-			.list-card-img {
-				display: flex;
-				justify-content: space-between;
-				margin-top: 10px;
-				width: 100%;
-				.list-card-img-item {
-					border-radius: 5px;
-					overflow: hidden;
-					margin-right: 10px;
-					&:last-child {
-						margin-right: 0;
-					}
-					img {
-						width: 100%;
-						height: 100%;
+				.list-card-content-title {
+					margin-top: 10px;
+				}
+				.list-card-img {
+					display: flex;
+					justify-content: space-between;
+					margin-top: 10px;
+					width: 100%;
+					.list-card-img-item {
+						flex: 1;
+						border-radius: 5px;
+						overflow: hidden;
+						margin-right: 10px;
+						&:last-child {
+							margin-right: 0;
+						}
+						img {
+							width: 100%;
+							height: 100%;
+						}
 					}
 				}
-			}
-			.list-card-content-des {
-				margin-top: 10px;
+				.list-card-content-des {
+					margin-top: 10px;
+				}
 			}
 		}
 		&.mode-image {

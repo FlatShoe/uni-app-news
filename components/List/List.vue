@@ -8,7 +8,7 @@
 		<swiper-item class="swiper-item" 
 								 :key="index"
 								 v-for="(item, index) in tab">								 
-			<ListItem />
+			<ListItem :list="list" />
 		</swiper-item>
 	</swiper>
 </template>
@@ -28,10 +28,19 @@
 		},
 		data() {
 			return {
-
+				list: []
 			}
 		},
 		methods: {
+			/*
+			* @Description获取视图卡相应数据内容
+			* @return undefined
+			*/
+			async getList () {
+				const {code, data} =  await this.$api.get_list('get_list')
+				if (code !== 200) return
+				this.list = data
+			},
 			/*
 			* @Description swiper组件滑动监听索引，并通过自定义事件传值至父组件
 			* @param {Object} e 事件参数对象
@@ -43,7 +52,7 @@
 			}
 		},
 		mounted() {
-			
+			this.getList()
 		}
 	}
 </script>

@@ -7,18 +7,28 @@
 	<!-- 自定义组件-选项卡相应滚动列表 -->
 	<ListScroll class="list-scroll">
 		<!-- 自定义组件 选项卡相应列表的视图 -->
-		<ListCard mode="base" />
-		<ListCard mode="cloumn" />
-		<ListCard mode="image" />
+		<ListCard 
+			:key="item._id" 
+			v-for="(item, index) in list" 
+			:mode="item.mode"
+			:item="item" />
 	</ListScroll>
 </template>
 
 <script>
 	export default {
+		props: {
+			list: {
+				type: Array,
+				default () {
+					return []
+				}
+			}
+		},
 		data() {
 			return {
 				
-			};
+			}
 		}
 	}
 </script>
