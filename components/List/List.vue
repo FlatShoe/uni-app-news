@@ -8,7 +8,7 @@
 		<swiper-item class="swiper-item" 
 								 :key="index"
 								 v-for="(item, index) in tab">								 
-			<ListItem :list="currentData[index]" />
+			<ListItem :list="currentData[index]" :load="load[index]" @loadmore="loadmore" />
 		</swiper-item>
 	</swiper>
 </template>
@@ -28,19 +28,51 @@
 		},
 		data() {
 			return {
-				currentData: {}
+				currentIndex: 0,
+				currentData: {}, // 数据懒加载
+				load: {}, // 每个分类都拥有自己的分页
+				pageSize: 2
 			}
 		},
 		methods: {
+			/*
+			* @Description 组件触底事件
+			* @return undefined
+			*/
+			loadmore () {
+				// 如果已经加载了所有数据，下拉刷新则不再请求
+				if (this.load[this.currentIndex].loading === 'noMore') return
+				this.load[this.currentIndex].page ++
+				this.getList(this.tab[this.currentIndex].name)
+			},
 			/*
 			* @Description获取视图卡相应数据内容
 			* @param {String} name 选项卡名字
 			* @return undefined
 			*/
 			async getList (name) {
-				const {code, data} =  await this.$api.get_list({url: 'get_list', name})
+				const currentIndex = this.currentIndex
+				
+				if (!this.load[currentIndex]) this.load[currentIndex] = {page: 1,
+				loading: 'loading'}
+				
+				const {code, data} =  await this.$api.get_list({
+					url: 'get_list', 
+					name,
+					page: this.load[currentIndex].page++,
+					pageSize: this.pageSize
+				})
 				if (code !== 200) return
-				this.$set(this.currentData, this.cardIndex, data)
+				if (data.length === 0) {
+					let oldLoad = {}
+					oldLoad.loading = 'noMore'
+					oldLoad.page = this.load[currentIndex].page
+					
+					this.$set(this.load, currentIndex, oldLoad)
+				}
+				let oldList = this.currentData[currentIndex] || []
+				oldList.push(...data)
+				this.$set(this.currentData, this.currentIndex, oldList)
 			},
 			/*
 			* @Description swiper组件滑动监听索引，并通过自定义事件传值至父组件
@@ -49,12 +81,15 @@
 			*/
 			changeCard (e) {
 				const {detail: {current}} = e
+				this.currentIndex = current
 				this.$emit('changeCard', current)
-				this.getList(this.tab[current].name)
+				// 当数据不存在或者数据长度为0 的时候才请求数据
+				if (!this.currentData[current] || this.currentData[current].length === 0) this.getList(this.tab[current].name)
+				
 			}
 		},
 		created() {
-			this.getList('后端开发')
+			this.getList('全部')
 		}
 	}
 </script>

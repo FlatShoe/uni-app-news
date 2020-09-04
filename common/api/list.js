@@ -7,7 +7,7 @@ export const get_label = ({url}) => {
 	return $http({url})
 }
 
-export const get_list = ({url, name}) => {
-	const data = {name}
+export const get_list = ({url, name, page, pageSize}) => {
+	const data = {name, page, pageSize}
 	return $http({url, data})
 }

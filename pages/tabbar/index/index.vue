@@ -31,6 +31,7 @@
 			async getLabel () {
 				const {code, data} = await this.$api.get_label({url: 'get_label'})
 				if (code !== 200) return
+				data.unshift({name: '全部'})
 				this.labelList = data
 			},
 			/*

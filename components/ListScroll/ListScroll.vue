@@ -5,7 +5,7 @@
  -->
 <template>
 	<view class="scroll">
-		<scroll-view class="scroll-list" scroll-y>
+		<scroll-view class="scroll-list" scroll-y @scrolltolower="scrolltolower">
 			<view >
 				<slot></slot>
 			</view>
@@ -19,6 +19,15 @@
 			return {
 				
 			};
+		},
+		methods: {
+			/*
+			* @Description 滚动组件底部促发事件 并通过自定义事件传递给父组件
+			* @return undefined
+			*/
+			scrolltolower () {
+				this.$emit('loadmore')
+			}
 		}
 	}
 </script>
