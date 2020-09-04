@@ -31,7 +31,7 @@
 				currentIndex: 0,
 				currentData: {}, // 数据懒加载
 				load: {}, // 每个分类都拥有自己的分页
-				pageSize: 2
+				pageSize: 10
 			}
 		},
 		methods: {

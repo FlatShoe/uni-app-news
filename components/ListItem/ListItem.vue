@@ -1,5 +1,5 @@
 <!-- 
-@Description 选项卡对应视图轮播中的每一块
+@Description 选项卡对应视图轮播中的每一块内容自定义组件
 @auth LHD
 @Date 2020-09-03
  -->

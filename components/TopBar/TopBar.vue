@@ -69,7 +69,6 @@
 </script>
 
 <style lang="less">
-	@import '../../common/style/icon.css';
 	.topbar {
 		.topbar-fixed {
 			position: fixed;

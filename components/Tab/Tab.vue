@@ -49,8 +49,6 @@
 </script>
 
 <style lang="less">
-	@import '../../common/style/icon.css';
-
 	.tab {
 		display: flex;
 		width: 100%;

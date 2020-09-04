@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App'
 import api from './common/api/index.js'
+import './common/style/icon.css'
 
 Vue.config.productionTip = false
 Vue.prototype.$api = api

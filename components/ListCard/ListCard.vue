@@ -13,6 +13,8 @@
 			<view class="list-card-content">
 				<view class="list-card-content-title">
 					<text>{{item.title}}</text>
+					<!-- 收藏自定义组件 -->
+					<Likes :item="item" />
 				</view>
 				<view class="list-card-content-des">
 					<view class="list-card-content-des-label">
@@ -33,6 +35,8 @@
 				</view>
 				<view class="list-card-content-title">
 					<text>{{item.title}}</text>
+					<!-- 收藏自定义组件 -->
+					<Likes :item="item" />
 				</view>
 				<view class="list-card-content-des">
 					<view class="list-card-content-des-label">
@@ -53,6 +57,8 @@
 			<view class="list-card-content">
 				<view class="list-card-content-title">
 					<text>{{item.title}}</text>
+					<!-- 收藏自定义组件 -->
+					<Likes :item="item" />
 				</view>
 				<view class="list-card-content-des">
 					<view class="list-card-content-des-label">
@@ -115,11 +121,12 @@
 			padding-left: 10px;
 
 			.list-card-content-title {
+				position: relative;
 				font-size: 14px;
 				color: #333;
 				font-weight: 400;
 				line-height: 1.2;
-
+				padding-right: 30px;
 				text {
 					overflow: hidden;
 					text-overflow: ellipsis;
