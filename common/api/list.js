@@ -14,6 +14,13 @@ export const get_list = ({url, name, page, pageSize}) => {
 	return $http({url, data})
 }
 /*
+* @Descript 文章收藏
+*/
+export const update_like = ({url, article_id}) => {
+	const data = {url, article_id}
+	return $http({url, data})
+}
+/*
 * @Descript 搜索结果
 */
 export const get_search = ({url, value}) => {
