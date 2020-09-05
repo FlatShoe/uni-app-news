@@ -97,6 +97,9 @@
 			*/
 			open () {
 				this.$emit('_click', this.item)
+				uni.navigateTo({
+					url: '/pages/home-detail/home-detail'
+				})
 			}
 		}
 	}
