@@ -13,7 +13,7 @@
 			<view v-if="isHistory" class="label-box">
 				<view class="label-header">
 					<text class="label-title">搜索历史</text>
-					<text class="label-clear">清空</text>
+					<text class="label-clear" @click="clear">清空</text>
 				</view>
 				<view class="label-content" v-if="historyLists.length">
 					<view class="label-content-item" @click="openHistory(item)" v-for="item in historyLists">{{item.name}}</view>
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-	import {mapState} from 'vuex'
+	import {mapState, mapMutations} from 'vuex'
 	export default {
 		data() {
 			return {
@@ -110,7 +110,18 @@
 			openHistory (item) {
 				this.value = item.name
 				this.get_search(this.value)
-			}
+			},
+			/*
+			* @Description 清空历史记录
+			* @return undefined
+			*/
+		 clear () {
+			 if (!this.historyLists.length) return
+			 this.$store.commit('CLEAR_HISTORY_LISTS')
+			 uni.showToast({
+				 title: '已清空'
+			 })
+		 }
 		},
 		computed: {
 			...mapState(['historyLists'])

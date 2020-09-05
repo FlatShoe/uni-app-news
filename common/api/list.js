@@ -17,7 +17,6 @@ export const get_list = ({url, name, page, pageSize}) => {
 * @Descript 搜索结果
 */
 export const get_search = ({url, value}) => {
-	console.log(value)
 	const data = {url, value}
 	return $http({url, data})
 }
