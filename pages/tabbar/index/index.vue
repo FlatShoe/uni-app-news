@@ -59,6 +59,9 @@
 			}
 		},
 		onLoad() {
+			uni.$on('labelChage', (res) => {
+				this.getLabel()
+			})
 			this.getLabel()
 		},
 	}
