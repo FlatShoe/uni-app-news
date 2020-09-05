@@ -1,3 +1,8 @@
+<!--
+ @Description 首页
+ @auth LHD
+ @Date 2020-09-01
+	-->
 <template>
 	<view class="home">
 		<!-- 自定义组件-TopBar -->

@@ -4,7 +4,7 @@
 @Date 2020-09-03
  -->
 <template>
-	<view>
+	<view @click="open">
 		<!-- 基础卡片 -->
 		<view v-if="item.mode === 'base'" class="list-card">
 			<view class="list-card-img">
@@ -89,6 +89,15 @@
 			return {
 
 			};
+		},
+		methods: {
+			/*
+			* @Description 打开详情页
+			* return undefined
+			*/
+			open () {
+				this.$emit('_click', this.item)
+			}
 		}
 	}
 </script>

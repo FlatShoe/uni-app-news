@@ -27,7 +27,7 @@
 					<view class="topbar-serch-icon iconfont">
 						<text>&#xe62e;</text>
 					</view>
-					<input class="topbar-serch-text" 
+					<input class="topbar-serch-input" 
 								type="text" 
 								placeholder="请输入您要搜索的内容"
 								v-model="serchValue" 
@@ -46,6 +46,10 @@
 			isSearch: {  // 是否首页调用
 				type: Boolean,
 				default: false
+			},
+			value: {
+				type: [String, Number],
+				default: ''
 			}
 		},
 		data() {
@@ -105,6 +109,11 @@
 				return this.statusBarHeight + this.topBarHeight
 			}
 		},
+		watch: {
+			value (newValue) {
+				this.serchValue = newValue
+			}
+		},
 		created() {
 			this.setAdaptive()
 		}
@@ -155,8 +164,9 @@
 					}
 					.topbar-search {
 						border-radius: 5px;
-						.topbar-serch-text {
+						.topbar-serch-input {
 							font-size: 14px;
+							width: 100%;
 						}
 					}
 				}
