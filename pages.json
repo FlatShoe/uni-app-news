@@ -5,7 +5,7 @@
 			"style": {
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "主页",
-				"navigationBarTextStyle":"white"
+				"navigationBarTextStyle": "white"
 			}
 		},
 		{
@@ -19,6 +19,11 @@
 			"style": {
 				"navigationBarTitleText": "我的"
 			}
+		}, {
+			"path": "pages/home-search/home-search",
+			"style": {
+				"navigationStyle": "custom"
+			}
 		}
 	],
 	"globalStyle": {
@@ -29,9 +34,8 @@
 	},
 	"tabBar": {
 		"color": "#666",
-		"selectedColor":"#f07373",
-		"list": [
-			{
+		"selectedColor": "#f07373",
+		"list": [{
 				"pagePath": "pages/tabbar/index/index",
 				"text": "首页",
 				"iconPath": "static/tabbar-icon/home.png",

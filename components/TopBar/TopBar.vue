@@ -8,12 +8,30 @@
 		<view class="topbar-fixed">
 			<!-- 状态栏占位适配 -->
 			<view :style="{height: statusBarHeight + 'px'}"></view>
-			<view class="topbar-content" :style="{'height': topBarHeight + 'px', 'width': topBarWidth + 'px'}">
-				<view class="topbar-serch">
+			<view class="topbar-content" 
+						:class="{'current-search': isSearch}"
+						:style="{'height': topBarHeight + 'px', 'width': topBarWidth + 'px'}" 
+						@click="open">
+				<view class="topbar-icon" v-if="isSearch">
+					<text class="icon iconfont">&#xe66d;</text>
+				</view>
+				<!-- 非搜索页显示的内容 -->
+				<view class="topbar-search" v-if="!isSearch">
 					<view class="topbar-serch-icon iconfont">
 						<text>&#xe62e;</text>
 					</view>
 					<view class="topbar-serch-text">uni-app、vue</view>
+				</view>
+				<!-- 搜索页显示的内容 -->
+				<view class="topbar-search" v-else>
+					<view class="topbar-serch-icon iconfont">
+						<text>&#xe62e;</text>
+					</view>
+					<input class="topbar-serch-text" 
+								type="text" 
+								placeholder="请输入您要搜索的内容"
+								v-model="serchValue" 
+								@input="inputChange" />
 				</view>
 			</view>
 		</view>
@@ -24,11 +42,18 @@
 
 <script>
 	export default {
+		props: {
+			isSearch: {  // 是否首页调用
+				type: Boolean,
+				default: false
+			}
+		},
 		data() {
 			return {
 				statusBarHeight: 20, // 设备状态栏高度
 				topBarHeight: 45, // 顶部导航栏内容高度
-				topBarWidth: 375 // 顶部导航栏内容宽度
+				topBarWidth: 375 ,// 顶部导航栏内容宽度
+				serchValue: '', // 搜索内容
 			}
 		},
 		methods: {
@@ -53,6 +78,24 @@
 				// 设置顶部导航栏的内容宽度
 				this.topBarWidth = left
 				// #endif
+			},
+			/*
+			* @Description 跳转到搜索页面
+			* @return undefined
+			*/
+			open () {
+				if (this.isSearch) return
+				uni.navigateTo({
+					url: '/pages/home-search/home-search'
+				})
+			},
+			/*
+			* @Description 搜索框键入事件
+			* @return undefined
+			*/
+			inputChange (e) {
+				const {value} = e.target
+				this.$emit('input', value)
 			}
 		},
 		computed: {
@@ -84,8 +127,7 @@
 				align-items: center;
 				padding: 0 15px;
 				box-sizing: border-box;
-
-				.topbar-serch {
+				.topbar-search {
 					display: flex;
 					align-items: center;
 					width: 100%;
@@ -100,6 +142,22 @@
 
 					.topbar-serch-text {
 						color: #999;
+					}
+				}
+				&.current-search {
+					.topbar-icon {
+						position: relative;
+						left: -7px;
+						.icon {
+							font-size: 18px;
+							color: #999;
+						}
+					}
+					.topbar-search {
+						border-radius: 5px;
+						.topbar-serch-text {
+							font-size: 14px;
+						}
 					}
 				}
 			}
