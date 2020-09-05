@@ -6,29 +6,31 @@
 				"navigationStyle": "custom",
 				"navigationBarTitleText": "主页",
 				"navigationBarTextStyle": "white"
-		}
+			}
 		},
 		{
 			"path": "pages/tabbar/follow/follow",
 			"style": {
 				"navigationBarTitleText": "关注"
-		}
+			}
 		},
 		{
 			"path": "pages/tabbar/my/my",
 			"style": {
 				"navigationBarTitleText": "我的"
-		}
+			}
 		}, 
 		{
 			"path": "pages/home-search/home-search",
 			"style": {
 				"navigationStyle": "custom"
-		}
+			}
 		}, 
 		{
 			"path": "pages/home-label/home-label",
-			"style": {}
+			"style": {
+				"navigationBarTitleText": "标签管理"
+			}
 		}
 	],
 	"globalStyle": {

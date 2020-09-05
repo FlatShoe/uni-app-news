@@ -13,7 +13,7 @@
 							:key="item.id" v-for="(item, index) in list">{{item.name}}</view>
 			</view>
 		</scroll-view>
-		<view class="tab-icon"><text class="icon iconfont">&#xe603;</text></view>
+		<view class="tab-icon" @click="open"><text class="icon iconfont">&#xe603;</text></view>
 	</view>
 </template>
 
@@ -43,6 +43,15 @@
 			changeTap (item, index) {
 				this.currentIndex = index
 				this.$emit('changeTap', {item, index})
+			},
+			/*
+			* @Description 跳转标签管理页
+			* @return undefined
+			*/
+			open () {
+				uni.navigateTo({
+					url: '/pages/home-label/home-label'
+				})
 			}
 		}
 	}
