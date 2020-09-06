@@ -6,22 +6,24 @@
 <template>
 	<view class="home-detail">
 		<!-- 文章详情 -->
-		<view class="detail-title">我是一名前端开发者，我们要不要学习node.js</view>
+		<view class="detail-title">{{foramData.title}}</view>
 		<view class="detail-header">
 			<view class="detail-header-avatar">
-				<img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1599333737099&di=be3396d6c594c4b70e811b64831d54d0&imgtype=0&src=http%3A%2F%2Fgss0.baidu.com%2F94o3dSag_xI4khGko9WTAnF6hhy%2Fzhidao%2Fpic%2Fitem%2F14ce36d3d539b6002ac5706de850352ac75cb7e4.jpg" mode="aspectFill" />
+				<img :src="foramData.author.avatar" />
 			</view>
 			<view class="detail-header-content">
-				<view class="detail-header-content-title">LIhangdi</view>
+				<view class="detail-header-content-title">{{foramData.author.author_name}}</view>
 				<view class="detail-header-content-info">
-					<text>2020-09-006</text>
-					<text>1234 浏览</text>
-					<text>2345 赞</text>
+					<text>{{foramData.create_time}}</text>
+					<text>{{foramData.browse_count}} 浏览</text>
+					<text>{{foramData.thumbs_up_count}} 赞</text>
 				</view>
 			</view>
 		</view>
 		<view class="detail-content">
-			详情数据
+			<view class="detail-content-html">
+				{{foramData.content}}
+			</view>
 		</view>
 		<!-- 工具栏 -->
 		<view class="detail-bottom">
@@ -48,8 +50,34 @@
 	export default {
 		data() {
 			return {
-				
+				foramData: {}, // 文章数据
 			};
+		},
+		methods: {
+			/*
+			* @Description 获取页面跳转携带过来的参数
+			* @param {String} info  参数数据
+			* @return undefined
+			*/
+			getParams (info) {
+				this.foramData = JSON.parse(info.params)
+			},
+			/*
+			* @Description 获取文章详情信息
+			* @return undefined
+			*/
+			async get_detail () {
+				const {code, data} = await this.$api.get_detail({
+					url: 'get_detail',
+					article_id: this.foramData.article_id
+				})
+				if (code !== 200) return
+				this.foramData = data
+			}
+		},
+		onLoad(query) {
+			this.getParams(query)
+			this.get_detail()
 		}
 	}
 </script>
@@ -100,7 +128,11 @@
 		}
 	}
 	.detail-content {
-		height: 1000px;
+		min-height: 500px;
+		margin-top: 20px;
+		.detail-content-html {
+			padding: 0 15px;
+		}
 	}
 	.detail-bottom {
 		position: fixed;
