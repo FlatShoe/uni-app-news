@@ -22,7 +22,7 @@
 		</view>
 		<view class="detail-content">
 			<view class="detail-content-html">
-				{{foramData.content}}
+				<uParse :content="foramData.content" :noData="noData" />
 			</view>
 		</view>
 		<!-- 工具栏 -->
@@ -47,10 +47,15 @@
 </template>
 
 <script>
+	import uParse from '@/components/feng-parse/parse.vue'
 	export default {
+		components: {
+			uParse
+		},
 		data() {
 			return {
 				foramData: {}, // 文章数据
+				noData: '<p style="text-align: center; color: #666">详情加载中</p>'
 			};
 		},
 		methods: {
@@ -69,8 +74,9 @@
 			async get_detail () {
 				const {code, data} = await this.$api.get_detail({
 					url: 'get_detail',
-					article_id: this.foramData.article_id
+					article_id: this.foramData._id
 				})
+				console.log(this.foramData._id)
 				if (code !== 200) return
 				this.foramData = data
 			}
