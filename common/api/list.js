@@ -42,3 +42,10 @@ export const get_detail = ({url, article_id}) => {
 	const data = {url, article_id}
 	return $http({url, data})
 }
+/*
+* @Description 更新文章评论
+*/
+export const update_comment = ({url, article_id, content}) => {
+	const data = {url, article_id, content}
+	return $http({url, data})
+}

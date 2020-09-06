@@ -22,9 +22,19 @@
 		</view>
 		<view class="detail-content">
 			<view class="detail-content-html">
-				<uParse :content="foramData.content" :noData="noData" />
+				<!-- <uParse :content="foramData.content" :noData="noData" /> -->
+				内容
+			</view>
+			<!-- 展示评论 -->
+			<view class="detail-comment">
+				<view class="comment-title">最新评论</view>
+				<view class="comment-content">
+					<!-- 展示评论自定义组件 -->
+					<CommentsBox />
+				</view>
 			</view>
 		</view>
+		
 		<!-- 工具栏 -->
 		<view class="detail-bottom">
 			<view class="detail-bottom-input" @click="openComment">
@@ -119,12 +129,35 @@
 				this.$refs.popup.close()
 			},
 			/*
-			* @Description 发布成功
+			* @Description 发布评论
 			* @return undefined
 			*/
 			submitComment () {
-				console.log('发布')
-				this.$refs.popup.close()
+				if (!this.commentsValue) return uni.showToast({
+					title: '请输入评论内容',
+					icon: 'none'
+				})
+				this.update_comment(this.commentsValue)
+			},
+			/*
+			* @Description 更新评论内容
+			* @param {*} value 评论内容
+			* @return undefined
+			*/
+			async update_comment (content) {
+				uni.showLoading()
+				const {code} = await this.$api.update_comment({
+					url: 'update_comment',
+					article_id: this.foramData._id,
+					content
+				})
+				if (code !== 200) return
+				this.closeComment()
+				uni.hideLoading()
+				uni.showToast({
+					title: '评论发布成功',
+					icon: 'none'
+				})
 			}
 		},
 		onLoad(query) {
@@ -188,7 +221,21 @@
 		.detail-content-html {
 			padding: 0 15px;
 		}
+		.detail-comment {
+			margin-top: 30px;
+			.comment-title {
+				padding: 10px 15px;
+				font-size: 14px;
+				color: #666;
+				border-bottom: 1px solid #fff;
+			}
+			.comment-content {
+				padding: 0 15px;
+				border-top: 1px solid #eee;
+			}
+		}
 	}
+	
 	.detail-bottom {
 		position: fixed;
 		left: 0;
@@ -233,6 +280,7 @@
 			}
 		}
 	}
+	
 	.popup-wrap {
 		background-color: #fff;
 		.popup-header {
